@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            list-style: none
+        }
+        
+        header {
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .desc {
+            width: 1000px;
+            min-height: 150px;
+            border: 1px dashed #ccc;
+            margin: 0 auto;
+        }
+        
+        .desce {
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+            border-bottom: 1px dashed #000
+        }
+        
+        .box {
+            width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>文件拖放</h1>
+    </header>
+    <div class="box">
+
+        <div class="box1">
+            <ul class="desc">
+
+            </ul>
+            <form name="upload">
+                <input type="file" name="fileselect" value="" multiple>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    // 获取元素
+    var listDesc = document.querySelector(".desc");
+    // form表单信息获取
+    var fileSelect = document.forms['upload']['fileselect'];
+    console.log(listDesc)
+    fileSelect.addEventListener('change', fileInfo);
+
+    function fileInfo(ev) {
+        ev.preventDefault();
+        console.log(ev)
+            // 导入文件 ev.target.files    移入文件
+        var file = ev.target.files || ev.dataTransfer.files
+        var oli = document.createElement('li');
+        // 添class名
+        oli.classList.add('desce')
+        for (var i = 0; i < file.length; i++) {
+            // 创建文本
+            var content = document.createTextNode(
+                file[i].name +
+                '文件类型 ：' +
+                file[i].type +
+                '图片大小：' + Math.round(file[i].size / 1024, 2) + ' ' + 'KB ' +
+                //                           对应的天数转换
+                file[i].lastModifiedDate.toLocaleDateString()
+            )
+        }
+        // 得到元素给oli
+        oli.appendChild(content);
+        // 把oli放到盒子里
+        listDesc.appendChild(oli);
+    }
+    listDesc.innerHTML = "<p class='dargArea'>把文件拖放到这里 </p>";
+    // addEventListener 点击是触发事件
+    // 当文件拖进来就触发
+    listDesc.addEventListener('dragover', onDragOver);
+    // 当文件拖拽进去触发一个函数
+    listDesc.addEventListener('dragleave', fileInfo);
+
+    listDesc.addEventListener('drop', fileInfo);
+
+    function onDragOver(ev) {
+        // ev.stopPropagation();
+        ev.preventDefault();
+        console.log('文件移入')
+    }
+
+    function onDragLeave() {
+        console.log('文件离开')
+    }
+</script>
+
+</html>

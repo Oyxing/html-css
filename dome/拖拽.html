@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        li {
+            width: 100px;
+            height: 30px;
+            background-color: #45ba80;
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+        
+        #box {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            margin-left: 100px
+        }
+    </style>
+</head>
+
+<body>
+    <li id="drag1" draggable="true" ondragstart="drag(event)">小白</li>
+    <li id="drag1" draggable="true" ondragstart="drag(event)">小明</li>
+    <li id="drag1" draggable="true" ondragstart="drag(event)">小红</li>
+    <li id="drag1" draggable="true" ondragstart="drag(event)">小李</li>
+    <li>不动</li>
+    <div id="box" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+    </div>
+</body>
+<script>
+    var heroli = document.getElementsByName("li");
+    var box = document.getElementById("box");
+
+    box.ondragenter = function() {
+        this.style.background = "blue";
+    }
+    box.addEventListener('drop', fileInfo);
+    box.addEventListener('dragover', onDragOver);
+    // 拖动元素
+    function fileInfo(ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        console.log(ev.dataTransfer);
+
+    }
+    // 拖到盒子成功
+    function onDragOver(ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        console.log("成功")
+    }
+
+    // 把拖拽的元素添加到盒子里
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        // 触发时间节点
+        ev.dataTransfer.setData("Text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        console.log(ev)
+            // 被拖数据的数据类型和值
+        var data = ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+
+</html>

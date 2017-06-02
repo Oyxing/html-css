@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=Wkdqt6LHbuszoYs4oLYPxPSu"></script>
+</head>
+
+<body>
+    <input type="" id="input1" name="" value="请求获取地理位置">
+    <script>
+        var input1 = document.getElementById("input1");
+        input1.onclick = function() {
+            var timer = navigator.geolocation.getCurrentPosition(function(postion) {
+                console.log(postion)
+            })
+        }
+    </script>
+
+</body>
+
+
+</html>
