@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" name="" id="" value="设置" />
+		<input type="button" name="" id="" value="读取" />
+		<input type="button" name="" id="" value="删除" />
+		<input type="text" name="" id="" placeholder="姓名" />
+		<input type="password" name="" id="" placeholder="密码" />
+		<input type="text" name="" id="" placeholder="年龄" />
+
+	</body>
+	<script type="text/javascript">
+		var Btn = document.getElementsByTagName("input");
+		Btn[0].onclick = function(){
+			localStorage.setItem("name",Btn[3].value)
+			localStorage.setItem("password",Btn[4].value)
+			localStorage.setItem("age",Btn[5].value)
+		}
+		
+		Btn[1].onclick = function(){
+			console.log(localStorage.getItem("name")+"\n")
+			console.log(localStorage.getItem("password")+"\n")
+			console.log(localStorage.getItem("age"))
+		}
+		
+		Btn[2].onclick = function(){
+			localStorage.clear()
+		}
+	</script>
+</html>

@@ -9,7 +9,54 @@
 </head>
 
 <body>
-    <textarea rows="10" cols="80"></textarea>
+    <input type="checkbox" name="" value="1">小明
+    <input type="checkbox" name="" value="2">小红
+    <input type="checkbox" name="" value="3">小龙
+    <input type="checkbox" name="" value="4">小白
+    <input type="checkbox" name="" value="5">小包
+    <input type="checkbox" name="" value="6">小华
+
 </body>
+<script>
+    var input = document.getElementsByTagName("input");
+
+
+
+    for (var i = 0; i < input.length; i++) {
+        input[i].onclick = function() {
+            if (this.checked) {
+                localStorage.setItem("addvalue", this.value);
+
+            } else {
+                localStorage.setItem("rmvalue", this.value);
+
+            }
+
+
+        }
+    }
+    //可以到另一个网页可以执行当前网页的内容
+    window.addEventListener('storage', function(ev) {
+
+        console.log(ev);
+        //键所对应键值
+        if (ev.key == "addvalue") {
+            for (var i = 0; i < input.length; i++) {
+                //挡墙窗口的val值等于另一个窗口的值
+                if (ev.newValue == input[i].value) {
+                    input[i].checked = true
+                }
+            }
+        } else if (ev.key == "rmvalue") {
+
+            for (var i = 0; i < input.length; i++) {
+                if (ev.newValue == input[i].value) {
+                    input[i].checked = false;
+                }
+            }
+        }
+
+    })
+</script>
 
 </html>

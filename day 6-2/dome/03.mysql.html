@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				list-style: none;
+			}
+			
+			ul li {
+				float: left;
+				margin-left: 10px;
+			}
+			#delete{
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+			
+
+		<input type="text" name="name" id="name" placeholder="用户" /><br />
+		<input type="password" name="password" id="passw" placeholder="密码" /><br />
+		<input type="text" name="age" id="age" placeholder="年龄" /><br />
+
+		<textarea name="textnav" id="textnav" rows="10" cols="25" style="resize: none;"></textarea><br />
+
+		<input type="button" value="提交" id="sub" />
+		<input type="button" value="重新提交" id="ressub" />
+		<input type="button" value="查看" id="exam" /><br />
+		<table border="3" cellspacing="4" cellpadding="4" id="stroing">
+			<tr><th>用户</th><th>年龄</th><th>留言</th><th>删除</th><th>编辑</th></tr>
+
+		</table>
+		
+		
+		
+	</body>
+	<script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var name, age, passoword, textnav, len, otr, datatable;
+
+
+//获取值
+		document.getElementById("sub").addEventListener('click', function() {
+			name = document.getElementById("name").value;
+			passoword = document.getElementById("passw").value;
+			age = document.getElementById("age").value;
+			textnav = document.getElementById("textnav").value;
+			console.log(document.getElementById("name"))
+			var values = [name, passoword, age, textnav];
+				
+			if(values[0].length != 0 || values[1].length != 0 || values[2].length != 0 ||values[3].length != 0 ){	
+				
+				addPlan(values);
+				examina();
+				
+				redact1(values)
+				
+			}else{	
+				alert("添加内容");
+			}
+	
+		});
+
+//				查看
+		document.getElementById("exam").addEventListener('click', function() {
+				
+			examina()
+		});
+	
+		var config = { //初始化websql数据库的参数信息
+			name: 'mf7e',
+			version: '2.0',
+			desc: 'manage my mysql',
+			size: 10 * 20 * 1024,
+		};
+		var db = window.openDatabase(config.name, config.version, config.desc, config.size);
+		crateTable(db);
+
+		//创建表格
+		function crateTable() {
+			var sql = 'create table if not exists LOGS(id INTEGER PRIMARY KEY ASC, name TEXT, password TEXT, age TEXT, textnav TEXT)';
+			db.transaction(function(tx) {
+				tx.executeSql(sql, null, function(tx, rs) {
+					console.log('执行sql成功');
+				});
+			});
+		}
+
+//添加
+		function addPlan(values) {
+			var sql = 'INSERT INTO LOGS (name, password, age, textnav) VALUES (?,?,?,?)';
+			db.transaction(function(tx) {
+				tx.executeSql(sql, values, function(tx, rs) {
+						var effectRow = rs.rows;
+				});
+			})
+		}
+		//查看数据
+		function examina() {
+			db.transaction(function(tx) {
+				tx.executeSql('SELECT * FROM LOGS', [], function(tx, results) {
+				len = results.rows.length;
+					datatable = document.getElementById("stroing"); 
+
+				for (var i = datatable.childNodes.length - 1; i > 1 ;i--){  
+				 	console.log(datatable.childNodes.length - 1)
+				 	console.log(datatable.childNodes[i])
+				        datatable.removeChild(datatable.childNodes[i]);  
+				}		
+				for(var i = 0; i < len; i++) {
+						 otr = document.createElement("tr");
+						var oname = document.createElement("td");
+						var oage = document.createElement("td");
+						var otext = document.createElement("td");
+						var odelete = document.createElement("td");
+						var ocompil = document.createElement("td");
+						oname.innerHTML = results.rows.item(i).name;
+						oage.innerHTML = results.rows.item(i).age;
+						otext.innerHTML = results.rows.item(i).textnav;
+						odelete.id = "delete";
+						odelete.className = "delete"+results.rows.item(i).id;
+						odelete.innerHTML = "删除";
+						ocompil.innerHTML = "编辑";
+						console.log(results.rows.item(i));
+						console.log(results.rows.item(i).id);
+						odelete.setAttribute("onclick","texDelete("+results.rows.item(i).id+")")
+						ocompil.setAttribute("onclick","redact("+results.rows.item(i).id+")")
+						otr.appendChild(oname);
+						otr.appendChild(oage);
+						otr.appendChild(otext);
+						otr.appendChild(odelete);
+						otr.appendChild(ocompil);
+						document.getElementById("stroing").appendChild(otr);	
+					}
+				
+				});
+			});
+		}
+		
+		//删除
+		function texDelete(id){
+				var odDel = document.getElementsByClassName("delete"+id)[0];
+				var oDelnode = odDel.parentNode;
+					oDelnode.remove();
+				db.transaction(function(tx) {
+				tx.executeSql('DELETE FROM LOGS WHERE id='+id);
+				
+			});
+			
+		}
+		
+		//编辑
+		function redact(id){
+			
+                db.transaction(function(tx) {
+					tx.executeSql('SELECT * FROM LOGS WHERE id = '+id, [], function(tx, results) {
+	              			console.log(results.rows[0])
+	              			var textnav1	= results.rows[0].textnav;
+	              			var name1	= results.rows[0].name;
+	              			var age1	= results.rows[0].age;
+	              			var passoword1 = results.rows[0].password;
+							name2 = document.getElementById("name");
+							
+							passoword = document.getElementById("passw");
+							age = document.getElementById("age");
+							textnav = document.getElementById("textnav");
+
+							console.log(textnav)
+		              			name2.value = name1;
+		              			console.log(name2.value)
+		              			passoword.value = passoword1		
+		              			age.value = age1
+		              			textnav.value = textnav1		
+  	
+	                  	})
+	                });
+	               
+			         	  db.transaction(function(tx) {
+								tx.executeSql('DELETE FROM LOGS WHERE id='+id);
+							});
+
+	
+		}
+
+     
+		
+	db.transaction(function(tx) {
+				tx.executeSql('SELECT * FROM LOGS', [], function(tx, results) {
+					len = results.rows.length;
+				
+				for(var i = 0; i < len; i++) {
+						 otr = document.createElement("tr");
+						var oname = document.createElement("td");
+						var oage = document.createElement("td");
+						var otext = document.createElement("td");
+						var odelete = document.createElement("td");
+						var ocompil = document.createElement("td");
+						oname.innerHTML = results.rows.item(i).name;
+						oage.innerHTML = results.rows.item(i).age;
+						otext.innerHTML = results.rows.item(i).textnav;
+						odelete.id = "delete";
+						odelete.className = "delete"+results.rows.item(i).id;
+						odelete.innerHTML = "删除";
+						ocompil.innerHTML = "编辑";
+						console.log(results.rows.item(i));
+						console.log(results.rows.item(i).id);
+						odelete.setAttribute("onclick","texDelete("+results.rows.item(i).id+")")
+						ocompil.setAttribute("onclick","redact("+results.rows.item(i).id+")")
+						otr.appendChild(oname);
+						otr.appendChild(oage);
+						otr.appendChild(otext);
+						otr.appendChild(odelete);
+						otr.appendChild(ocompil);
+						document.getElementById("stroing").appendChild(otr);	
+					}
+				
+				});
+			});
+
+	</script>
+
+</html>
