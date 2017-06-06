@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+input:checked+span{
+    background-color: #ff0000;
+}
+input:checked+span:after{
+    content: "被选中";
+}
+    </style>
+</head>
+<form>
+<fieldset>
+    <legend>选中下面的项</legend>
+    <ul>
+        <li><label for=""><input type="radio" name="colour-group" value="0"><span>1</span></label></li>
+        <li><label for=""><input type="radio" name="colour-group" value="1"><span>2</span></label></li>
+        <li><label for=""><input type="radio" name="colour-group" value="2"><span>3</span></label></li>
+    </ul>
+</fieldset>
+<fieldset>
+    <legend>选中下面的项</legend>
+    <ul>
+        <li><label for=""><input type="checkbox" name="colour-group1" value="0"><span>1</span></label></li>
+        <li><label for=""><input type="checkbox" name="colour-group1" value="1"><span>2</span></label></li>
+        <li><label for=""><input type="checkbox" name="colour-group1" value="2"><span>3</span></label></li>
+    </ul>
+</fieldset>
+</form>
+
+<body>
+
+</body>
+
+</html>

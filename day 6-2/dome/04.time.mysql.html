@@ -32,7 +32,7 @@
 		<input type="button" value="重新提交" id="ressub" />
 		<input type="button" value="查看" id="exam" /><br />
 		<table border="3" cellspacing="4" cellpadding="4" id="stroing">
-			<tr><th>用户</th><th>标题</th><th>留言</th><th>删除</th><th>编辑</th></tr>
+			<tr><th>用户</th><th>标题</th><th>留言</th><th>时间</th><th>删除</th><th>编辑</th></tr>
 
 		</table>
 		
@@ -57,9 +57,7 @@
 				
 				addPlan(values);
 				examina();
-				
-				redact1(values)
-				
+								
 			}else{	
 				alert("添加内容");
 			}
@@ -73,7 +71,7 @@
 		});
 	
 		var config = { //初始化websql数据库的参数信息
-			name: 'mf7e',
+			name: 'mf7me',
 			version: '2.0',
 			desc: 'manage my mysql',
 			size: 10 * 20 * 1024,
@@ -83,7 +81,7 @@
 
 		//创建表格
 		function crateTable() {
-			var sql = 'create table if not exists LOGS(id INTEGER PRIMARY KEY ASC, name TEXT, password TEXT, age TEXT, textnav TEXT)';
+			var sql = 'create table if not exists LOGS(id INTEGER PRIMARY KEY ASC, name TEXT, password TEXT, age TEXT, textnav TEXT, note_date TEXT)';
 			db.transaction(function(tx) {
 				tx.executeSql(sql, null, function(tx, rs) {
 					console.log('执行sql成功');
@@ -93,7 +91,7 @@
 
 //添加
 		function addPlan(values) {
-			var sql = 'INSERT INTO LOGS (name, password, age, textnav) VALUES (?,?,?,?)';
+			var sql = "INSERT INTO LOGS (name, password, age, textnav, note_date) VALUES (?,?,?,?,DATETIME('now', 'localtime'))";
 			db.transaction(function(tx) {
 				tx.executeSql(sql, values, function(tx, rs) {
 						var effectRow = rs.rows;
@@ -113,14 +111,16 @@
 				        datatable.removeChild(datatable.childNodes[i]);  
 				}		
 				for(var i = 0; i < len; i++) {
-						 otr = document.createElement("tr");
+									 otr = document.createElement("tr");
 						var oname = document.createElement("td");
 						var oage = document.createElement("td");
 						var otext = document.createElement("td");
+						var otime = document.createElement("td");
 						var odelete = document.createElement("td");
 						var ocompil = document.createElement("td");
 						oname.innerHTML = results.rows.item(i).name;
 						oage.innerHTML = results.rows.item(i).age;
+						otime.innerHTML = results.rows.item(i).note_date;
 						otext.innerHTML = results.rows.item(i).textnav;
 						odelete.id = "delete";
 						odelete.className = "delete"+results.rows.item(i).id;
@@ -133,9 +133,10 @@
 						otr.appendChild(oname);
 						otr.appendChild(oage);
 						otr.appendChild(otext);
+						otr.appendChild(otime);
 						otr.appendChild(odelete);
 						otr.appendChild(ocompil);
-						document.getElementById("stroing").appendChild(otr);	
+						document.getElementById("stroing").appendChild(otr);		
 					}
 				
 				});
@@ -198,10 +199,12 @@
 						var oname = document.createElement("td");
 						var oage = document.createElement("td");
 						var otext = document.createElement("td");
+						var otime = document.createElement("td");
 						var odelete = document.createElement("td");
 						var ocompil = document.createElement("td");
 						oname.innerHTML = results.rows.item(i).name;
 						oage.innerHTML = results.rows.item(i).age;
+						otime.innerHTML = results.rows.item(i).note_date;
 						otext.innerHTML = results.rows.item(i).textnav;
 						odelete.id = "delete";
 						odelete.className = "delete"+results.rows.item(i).id;
@@ -214,6 +217,7 @@
 						otr.appendChild(oname);
 						otr.appendChild(oage);
 						otr.appendChild(otext);
+						otr.appendChild(otime);
 						otr.appendChild(odelete);
 						otr.appendChild(ocompil);
 						document.getElementById("stroing").appendChild(otr);	
