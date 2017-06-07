@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        body {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        div {
+            position: relative;
+            overflow: hidden;
+            margin: 110px 0px 0px 80px;
+            height: 302px;
+        }
+        
+        div ul {
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: all 1s ease 0s;
+        }
+        
+        div ul li {
+            float: left;
+        }
+        
+        .box {
+            position: absolute;
+            margin-left: 398px;
+            margin-top: -2px;
+            height: 302px;
+            width: 403px;
+            border: 1px solid #000;
+        }
+        
+        div ul li img {
+            width: 400px;
+            height: 300px;
+        }
+        
+        div ul .bonder-img-1 {
+            transform: rotateY(45deg) translateZ(35px);
+        }
+        
+        div ul .bonder-img-2 {
+            transform: rotateY(0deg) translateZ(20px);
+        }
+        
+        div ul .bonder-img-3 {
+            transform: rotateY(45deg) translateZ(-35px);
+        }
+        
+        .fot,
+        .top {
+            width: 70px;
+            height: 30px;
+            background-color: red;
+            margin-left: 14px;
+            margin-top: 21px;
+            color: wheat;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bonnder">
+        <div class="box"></div>
+
+        <ul class="bnonder-img">
+            <li class="bonder-img-1"><img src="011.png" alt=""></li>
+            <li class="bonder-img-2"><img src="022.png" alt=""></li>
+            <li class="bonder-img-3"><img src="033.png" alt=""></li>
+        </ul>
+
+    </div>
+    <button class="top" type="" style="margin-left:580px;">上一张</button>
+    <button class="fot" type="">下一张</button>
+</body>
+<script>
+    var oul = document.getElementsByClassName("bnonder-img")[0];
+</script>
+
+</html>
