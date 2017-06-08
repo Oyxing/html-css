@@ -19,9 +19,10 @@
         
         div {
             position: relative;
-            overflow: hidden;
+            perspective: 800px;
             margin: 110px 0px 0px 80px;
             height: 302px;
+            overflow: hidden;
         }
         
         div ul {
@@ -49,19 +50,18 @@
         }
         
         div ul .bonder-img-1 {
-            transform: rotateY(45deg) translateZ(35px);
+            transform: rotateY(30deg) translateZ(30px) translateX(60px);
         }
         
         div ul .bonder-img-2 {
-            transform: rotateY(0deg) translateZ(20px);
+            transform: none;
         }
         
         div ul .bonder-img-3 {
-            transform: rotateY(45deg) translateZ(-35px);
+            transform: rotateY(-30deg) translateZ(-30px) translateX(-60px);
         }
         
-        .fot,
-        .top {
+        .one,.two,.three {
             width: 70px;
             height: 30px;
             background-color: red;
@@ -83,11 +83,36 @@
         </ul>
 
     </div>
-    <button class="top" type="" style="margin-left:580px;">上一张</button>
-    <button class="fot" type="">下一张</button>
+    <button class="one" type="" style="margin-left:580px;">1</button>
+    <button class="two" type="">2</button>
+    <button class="three" type="">3</button>
 </body>
+<script src="jquery.js"></script>
 <script>
     var oul = document.getElementsByClassName("bnonder-img")[0];
+    var oneBtn = document.getElementsByClassName("one")[0];
+    var twoBtn = document.getElementsByClassName("two")[0];
+    var threeBtn = document.getElementsByClassName("three")[0];
+    oneBtn.onclick = function(){
+        $("li").removeClass();
+        $("li:eq(0)").addClass("bonder-img-2");
+        $("li:eq(1)").addClass("bonder-img-1");
+        $("li:eq(2)").addClass("bonder-img-3");
+    }
+
+     twoBtn.onclick = function(){
+        $("li").removeClass();
+        $("li:eq(0)").addClass("bonder-img-1");
+        $("li:eq(1)").addClass("bonder-img-2");
+        $("li:eq(2)").addClass("bonder-img-3");
+    }
+     threeBtn.onclick = function(){
+        $("li").removeClass();
+        $("li:eq(0)").addClass("bonder-img-3");
+        $("li:eq(1)").addClass("bonder-img-1");
+        $("li:eq(2)").addClass("bonder-img-2");
+    }
+
 </script>
 
 </html>

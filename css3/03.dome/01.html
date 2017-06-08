@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{padding: 0; margin: 0;background-color: #ccc;position: relative}
+    
+ /*叶子*/
+    #box, #box1, #box2, #box3{width: 1000px;height: 450px;background-color: white;position: absolute; animation-fill-mode : forwards;}
+    .leaf1{position: absolute;background: url("01.png")no-repeat 0px 0px; width: 245px;height: 150px;margin-left: 135px;margin-top: 160px}
+    .leaf2{ 
+        position: absolute;
+    background: url(01.png)no-repeat 0px -149px;
+    width: 88px;
+    height: 66px;
+    margin-top: 0px;
+    margin-left: 0px;
+    transition: all 1s ease 0s;
+    animation: leafmove 6s linear infinite;
+    }
+
+    @-webkit-keyframes leafmove{
+        0%{ top:0px;left: 0px;opacity: 1;}
+        25%{margin-top: 100px;margin-left:100px;opacity: 0.7;}
+        50%{margin-top: 200px;margin-left:200px;opacity: 0.4;}
+        75%{margin-top: 300px;margin-left:300px;opacity: 0.3;}
+        100%{margin-top: 400px;margin-left:400px;opacity: 0;}
+    }
+    /*尺子圆*/
+  
+    .ruler{   
+        position: absolute;
+        background: url(01.png)no-repeat 0px -314px;
+        margin-top: 100px;
+         margin-left: 175px;
+        width: 170px;
+        height: 167px;
+        animation: zhuan 3s ease-in-out 1s infinite;
+
+    }
+    .ruler1{
+        position: absolute;
+        background: url(01.png)no-repeat 0px -215px;
+         margin-top: 170px;
+         margin-left: 320px; width: 96px;
+        height: 96px;
+        animation: zhuan 2s ease-in-out 1s infinite;
+    }
+    .cirle{   
+        position: absolute;
+        background: url(01.png)no-repeat 0px -483px;
+         margin-top: 110px;
+         margin-left: 250px;
+        width: 138px;
+        height: 136px;
+        animation: zhuan 1.5s ease-in-out 1s infinite;
+   }
+   @-webkit-keyframes zhuan{
+       0%{
+            transform: rotateZ(0deg);
+       }
+        30%{
+            transform: rotateZ(360deg);
+       }
+        100%{
+            transform: rotateZ(360deg);
+       }
+   }
+   /*灯泡*/
+  
+    .bulb{   
+        background: url(01.png)no-repeat 0px -620px;
+       margin-left: 75px;margin-top: -195px;width: 200px;
+        height: 268px;
+         
+    }
+    .ray{ background: url(01.png)no-repeat 0px -886px;
+        width: 340px;
+        height: 262px;
+        transition: all 1s ease 0s;
+        animation: bulbray 2s linear infinite;
+    }
+    @-webkit-keyframes bulbray{
+        0%{opacity: 1;}
+        50%{opacity: 0.5;}
+        100%{opacity: 0;}
+    }
+     /*火箭*/
+ 
+    .light1{
+           position: absolute;
+    background: url(01.png)no-repeat -394px -221px;
+     transform: translateX(300px) translateY(35px); width: 98px;
+    height: 95px;
+        animation: fly .3s linear infinite;
+    
+        }
+    .light2{
+            position: absolute;
+            background: url(01.png)no-repeat -163px -138px;
+      
+       transform: translateX(300px) translateY(35px);width: 76px;
+            height: 88px;
+        animation: fly .5s linear infinite;
+            
+    }
+    .light3{
+            position: absolute;
+    background: url(01.png)no-repeat -242px -219px;
+     transform: translateX(300px) translateY(35px); width: 153px;
+    height: 153px;
+        animation: fly .7s linear infinite;
+    
+    }
+    .light4{
+        position: absolute;
+        background: url(01.png)no-repeat -231px -373px;
+        margin-left: 90px;
+        margin-top: 110px; width: 170px;
+        height: 155px;
+        animation: fly .3s linear infinite;
+        
+    }
+    .rocket{
+        position: absolute;
+        background: url(01.png)no-repeat -238px 0px;
+        margin-left: 100px;
+        margin-top: 60px;
+        width: 228px;
+        height: 220px;
+        
+    }
+
+    @-webkit-keyframes fly{
+        0%{
+            opacity: 0;
+            transform: translateY(-400px) translateX(400px);
+        }
+        50%{
+            opacity: 1;
+            transform: translateY(100px) translateX(100px);
+        }
+        100%{
+                opacity: 0;
+            transform: translateY(400px) translateX(-400px);
+        }
+    }
+    
+       #box{opacity: 0; animation: xiaoshi 10s linear 0s;}
+       #box1{opacity: 0;animation: xiaoshi 10s linear 10s;}
+       #box2{opacity: 0;animation: xiaoshi 10s linear 20s;}
+       #box3{opacity: 0;animation: xiaoshi 10s linear 30s;animation-fill-mode : forwards;}
+
+      @-webkit-keyframes xiaoshi{
+         0%{
+             opacity: 0;
+             transform: scale(0.1)
+         }
+         30%{
+             opacity: 0.3;
+             
+             transform: scale(1)
+         }
+         60%{
+             opacity: 0.7;
+             
+             transform: scale(1)
+         }
+         100%{
+             opacity: 1;
+             transform: scale(1)
+         }
+      }
+   </style>
+</head>
+<body>
+    <div id="bagbox">
+    <!--叶子-->
+    <div id="box">
+        <div class="leaf1"></div>
+        <div class="leaf2"></div>
+    </div>
+<!--尺子球-->
+    <div id="box1">
+        <div class="cirle"></div>
+         <div class="ruler"></div>
+        <div class="ruler1"></div>
+    </div>
+<!--灯泡-->
+    <div id="box2">
+        <div class="ray"></div>
+        <div class="bulb"></div>
+    </div>
+<!--火箭-->
+    <div id="box3">
+        <div class="rocket"></div>
+        <div class="light1"></div>
+        <div class="light2"></div>
+        <div class="light3"></div>
+        <div class="light4"></div>
+    </div>
+   </div> 
+</body>
+<script src="jquery.js"></script>
+<script>
+
+    var num = 0;
+
+    setInterval(fly,100)
+    function fly(){
+        num = Math.random()*4;
+         $(".rocket").css( "transform" ,"translateX("+num+"px) translateY("+num+"7px)")
+    }
+ 
+
+
+
+</script>
+</html>

@@ -86,10 +86,12 @@
         </div>
         
     </body>
+    <script src="jquery.js"></script>
     <script>
         var oul = document.getElementsByClassName("map")[0];
         console.log(oul)
-        setInterval(zhuan,100)
+
+        var time = setInterval(zhuan,100)
         var num = 0 ;
          function zhuan(){ 
             num++;
@@ -97,5 +99,37 @@
             oul.style.transform = "rotateY("+num+"deg) rotateZ(-10deg)";   
             console.log(num)
          }  
+
+
+        var box = $('.map');
+
+        var nowRotateX = 0;
+        var nowRotateY = 0;
+
+        $(document).mousedown(function(ev) {
+            console.log(time)
+            clearInterval(time)
+            startX = ev.clientX;
+            startY = ev.clientY;
+
+            $(document).mousemove(function(ev) {
+                var deltaX = ev.clientX - startX;
+                var deltaY = ev.clientY - startY;
+                console.log(deltaX);
+                console.log(deltaY);
+                nowRotateX += -deltaY / 100;
+                nowRotateY += deltaX / 100;
+
+                box.css("transform", "rotateX(" + nowRotateX/5 + "deg) rotateY(" + nowRotateY + "deg)");
+                return false;
+            })
+        })
+
+
+        $(document).mouseup(function() {
+            $(document).off('mousemove');
+            box.css("transition", "all 1s ease 0s");
+            time = setInterval(zhuan,100)
+        })
     </script>
     </html>
