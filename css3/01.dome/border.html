@@ -234,6 +234,29 @@
             width: 0px;
             height: 0px;
          }
+        .item:nth-child(22) .border-radius{
+            border: 1px solid white;
+           margin-left: 35px;
+           margin-top: 20px;
+
+         }
+        .item:nth-child(22) .border-radius::after,.item:nth-child(22) .border-radius::before{
+            content: '';
+            position: absolute;
+            background-color: red;
+            border-radius: 50px 50px 0px 10px;
+            width: 109px;
+            height: 159px;
+         }
+          .item:nth-child(22) .border-radius::after{
+            transform: rotate(-45deg);
+         }
+        .item:nth-child(22) .border-radius::before{
+            transform: rotate(45deg) translateX(25px) translateY(-25px);
+         }
+
+
+
     </style>
 </head>
 
@@ -356,6 +379,11 @@
                 </div>
             </div>
             <div class="item" data-brief="三角形">
+                <div class="border-radius">
+
+                </div>
+            </div>
+            <div class="item" data-brief="心">
                 <div class="border-radius">
 
                 </div>

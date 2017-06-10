@@ -100,53 +100,42 @@
     <script src='jquery.js'>
     </script>
     <script>
+
+
         var idx = 2;
         $("#rightBtn").click(function() {
             idx--;
 
             if (idx < 0) {
-                idx = 0;
+                idx = 4;
                 return;
             }
             setClass(idx);
+        console.log(idx)    
 
         })
-        var $lis = $('li');
-        var classNameArr = ['left4', 'left3', 'left2', "left1", "center", "right1", 'right2', "right3", "right4"];
-
-        function setClass(idx) {
-            var arr = classNameArr.slice(idx, idx + 5);
-            console.log(arr)
-            $lis.each(function(i) {
-                console.log(i)
-                $(this).attr("class", arr[i]);
-            })
-        }
-
-
-
-        var idx = 0;
         $("#leftBtn").click(function() {
             idx++;
-                console.log(idx)
             if (idx > 4) {
                 idx = 0;
                 return;
             }
+        console.log(idx)    
+            
             setClass(idx);
 
         })
-        var $lis = $('li');
-        var classNameArr = ['left4', 'left3', 'left2', "left1", "center", "right1", 'right2', "right3", "right4"];
 
+        var $lis = $('li');
+        var classNameArr = ["right1", 'right2','left2', 'left1',  "center",  "right1", "right2",'left2', "left1"];
         function setClass(idx) {
             var arr = classNameArr.slice(idx, idx + 5);
             console.log(arr)
             $lis.each(function(i) {
-                console.log(i)
                 $(this).attr("class", arr[i]);
             })
         }
+
     </script>
 </body>
 
