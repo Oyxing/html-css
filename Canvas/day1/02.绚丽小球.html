@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="1600px" height="800px" style="background-color:#000;"></canvas>
+</body>
+<script src="https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    // 设置颜色
+     var color = ['#ffcc00', '#ff9900', '#993366', '#66cccc', '#ff99cc'];
+
+     function Canvas(x,y,r){
+        //  x轴
+         this.x = x;
+        //  y轴
+         this.y = y;
+        //  半径
+         this.r = r;
+        //  筛选
+         this.color = _.sample(color);
+         this.deltaX = Math.random()*8 -4;
+         this.deltaY = Math.random()*8 -4;
+        //  添加当前创建的小球到数组里
+         bollArr.push(this);
+     }
+    //  渲染
+     Canvas.prototype.render = function(){
+         
+        if (this.r <= 0) {
+            ballArr = _.without(bollArr, this);
+            return;
+        }
+        //画布第一次创建时定义的方程
+        ctx.beginPath();
+
+        ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+        /*
+        x	圆的中心的 x 坐标。
+        y	圆的中心的 y 坐标。
+        r	圆的半径。
+        sAngle	起始角，以弧度计（弧的圆形的三点钟位置是 0 度）。
+        eAngle	结束角，以弧度计。
+        counterclockwise	可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
+        */
+        // 填充样式
+        ctx.fillStyle = this.color;
+    // 整体填充
+         ctx.fill()
+        }
+
+    Canvas.prototype.upate = function(){
+        this.x += this.deltaX;
+        this.y += this.deltaY;
+        this.r -= 0.2;
+    }
+
+    canvas.onmousemove = function(ev){
+
+            new Canvas(ev.offsetX,ev.offsetY, 20);
+
+    }
+
+var bollArr = [];
+    setInterval(function() {
+        //清空矩形内所指的橡素
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // 用each方法循环数组创建动画
+        _.each(ballArr, function(i) {
+            i.update();
+            i.render();
+        })
+    }, 1)
+
+</script>
+</html>
