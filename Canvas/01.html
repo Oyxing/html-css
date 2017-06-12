@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="200" height="200" style="border:1px solid #000"></canvas>
+</body>
+<script>
+    var dom = document.getElementById("myCanvas");
+    // 创建 context 对象
+    var ctx = dom.getContext("2d");
+    // fillStyle属性可以是CSS颜色，渐变，或图案。fillStyle 默认设置是#000000（黑色）。
+    // ctx.fillStyle = "#ff0";
+    // fillRect(x,y,width,height) 方法定义了矩形当前的填充方式。
+    // ctx.fillRect(0, 0, 150, 75);
+
+    /*moveTo(x,y) 定义线条开始坐标
+    lineTo(x,y) 定义线条结束坐标*/
+    // ctx.moveTo(0, 0);
+    // ctx.lineTo(200, 300);
+
+
+
+    // arc(x,y,r,start,stop)绘制圆形 arc(圆心X，圆心Y，半径R，起点，终止点)。
+    // ctx.beginPath();
+    ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+    // 绘制出一条线
+    ctx.stroke();
+</script>
+
+</html>
