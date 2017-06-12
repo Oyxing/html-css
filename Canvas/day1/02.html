@@ -10,23 +10,29 @@
 <style>
     div {
         text-align: center;
-        margin-top: 250px;
+        margin: 20px auto;
     }
     
     #clock {
-        border: 1px solid #ccc;
+        background: url("img/09.jpg")no-repeat;
+        background-size: 100%;
+        border-radius: 50%;
     }
 </style>
 
 <body>
     <div>
-        <canvas id="clock" height="400px" width="400px"></canvas>
+        <canvas id="clock" height="600px" width="600px"></canvas>
 
     </div>
 </body>
 <script>
     var dom = document.getElementById("clock");
     var ctx = dom.getContext("2d");
+
+    var image = new Image();
+
+
     console.log(ctx);
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
@@ -41,11 +47,13 @@
 
         ctx.beginPath();
         // 宽度
-        ctx.lineWidth = 10 * rem;
+        ctx.lineWidth = 8 * rem;
+        ctx.strokeStyle = "#744F22";
         // 画圆
         ctx.arc(0, 0, r - ctx.lineWidth / 2, 0, 2 * Math.PI, false);
         ctx.stroke();
         var hourNumbers = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2];
+
         ctx.font = 18 * rem + "px Aeial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -61,10 +69,10 @@
             var y = Math.sin(rad) * (r - 18 * rem);
             ctx.beginPath();
             if (i % 5 === 0) {
-                ctx.fillStyle = "#000"
+                ctx.fillStyle = "red"
                 ctx.arc(x, y, 2 * rem, 0, 2 * Math.PI, false);
             } else {
-                ctx.fillStyle = "#ccc"
+                ctx.fillStyle = "#ff0"
                 ctx.arc(x, y, 2 * rem, 0, 2 * Math.PI, false);
             }
             ctx.fill();
@@ -77,6 +85,7 @@
         var rad = 2 * Math.PI / 12 * hour;
         var mrad = 2 * Math.PI / 12 / 60 * minute;
         ctx.rotate(rad + mrad);
+        ctx.strokeStyle = "#000";
         ctx.lineWidth = 6;
         ctx.lineCap = "round";
         ctx.moveTo(0, 10 * rem);
@@ -90,6 +99,7 @@
         ctx.beginPath();
         var rad = 2 * Math.PI / 60 * minute;
         ctx.rotate(rad);
+        ctx.strokeStyle = "#000";
         ctx.lineWidth = 3;
         ctx.lineCap = "round";
         ctx.moveTo(0, 10 * rem);
