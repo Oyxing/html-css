@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script src="https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="js/digit.js"></script>
+<script>
+    var window_width = 1024;
+    var window_height = 768;
+    var r = 8;
+    var margin_top = 60;
+    var margin_left = 30;
+    var data 
+    var hours 
+    var minutes 
+    var seconds
+    var ctx 
+    var bollArr = [];
+    var colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]
+
+window.onload = function(){
+        
+    var canvas = document.getElementById("canvas"); 
+    ctx = canvas.getContext("2d");
+
+    canvas.width = window_width
+    canvas.height = window_height
+    render(ctx);
+       setInterval(function(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        render (ctx)
+        update()
+    }, 500)
+
+    }
+    
+function render (ctx){
+        data = new Date()
+        hours = data.getHours();
+        minutes = data.getMinutes();
+        seconds = data.getSeconds();
+
+        renderDigit(margin_left,margin_top,parseInt(hours/10),ctx);
+        renderDigit(margin_left+15*(r+1),margin_top,parseInt(hours%10),ctx);
+        renderDigit(margin_left+30*(r+1),margin_top,10,ctx);
+        renderDigit(margin_left+39*(r+1),margin_top,parseInt(minutes/10),ctx);
+        renderDigit(margin_left+54*(r+1),margin_top,parseInt(minutes%10),ctx);
+        renderDigit(margin_left+69*(r+1),margin_top,10,ctx);
+        renderDigit(margin_left+78*(r+1),margin_top,parseInt(seconds/10),ctx);
+        renderDigit(margin_left+93*(r+1),margin_top,parseInt(seconds%10),ctx)
+
+
+        // bollArr.push()  
+
+}
+
+function update(){
+        addBalls(margin_left,margin_top,parseInt(hours/10));
+        addBalls(margin_left+15*(r+1),margin_top,parseInt(hours%10));
+        addBalls(margin_left+39*(r+1),margin_top,parseInt(minutes/10));
+        addBalls(margin_left+54*(r+1),margin_top,parseInt(minutes%10));
+        addBalls(margin_left+78*(r+1),margin_top,parseInt(seconds/10));
+        addBalls(margin_left+93*(r+1),margin_top,parseInt(seconds%10))
+
+}
+  
+function addBalls( x , y , num ){
+
+    for( var i = 0  ; i < digit[num].length ; i ++ )
+        for( var j = 0  ; j < digit[num][i].length ; j ++ )
+            if( digit[num][i][j] == 1 ){
+                var aBall = {
+                    x:x+j*2*(r+1)+(r+1),
+                    y:y+i*2*(r+1)+(r+1),
+                    g:1.5+Math.random(),
+                    vx:Math.pow( -1 , Math.ceil( Math.random()*1000 ) ) * 4,
+                    vy:-5,
+                    color: colors[ Math.floor( Math.random()*colors.length ) ]
+                }
+
+                bollArr.push(aBall)
+            }
+            
+}
+
+
+
+
+
+ function renderDigit(x,y,num,ctx){
+     ctx.fillStyle = "rgb(0,102,153)";
+  
+
+    for (var i=0 ;i < digit[num].length;i++){
+          for (var j=0 ;j < digit[num][i].length;j++){
+            if(digit[num][i][j] == 1){
+
+                ctx.beginPath();
+                ctx.arc(x+j*2*(r+1)+(r+1),y+i*2*(r+1)+(r+1),r,0,2*Math.PI);
+                ctx.closePath();
+                ctx.fill();
+
+            }
+        }
+    }
+  
+ }
+
+
+ 
+</script>
+</html>

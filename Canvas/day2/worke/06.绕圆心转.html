@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+</body>
+<script>
+var canvas = document.getElementById("canvas")
+ var ctx = canvas.getContext("2d");
+ var rad = 0.1;
+ var red = 0;
+ var red1 = 0;
+ var red2 = 0;
+        setInterval(function(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            red += 0.1;
+            drawBckground()
+        },250)
+         setInterval(function(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            red1+= 0.1;
+            drawBckground()
+        },100)
+        setInterval(function(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            red2 += 0.1;
+            drawBckground()
+        },150)
+ var x 
+var y
+function drawBckground(){
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(canvas.width/2,canvas.height/2,60,0,7,false);
+    ctx.closePath();
+    ctx.fillStyle = "#ccc";
+    ctx.fill();
+    ctx.font = 50 +"px Arial";
+    ctx.fillStyle = "#fff";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("WEB",canvas.width/2,canvas.height/2);
+    ctx.save();
+    ctx.translate(canvas.width/2,canvas.height/2);
+
+    for (var i = 0; i < 60; i++) {
+            var rad = 2 * Math.PI / 60 * i;
+            // 利用三角函数找点
+            var x = Math.cos(rad) * (150);
+            var y = Math.sin(rad) * (150 );
+            ctx.beginPath();
+            ctx.fillStyle = "red"
+            ctx.arc(x,y, 3, 0, 2 * Math.PI, false);
+            // 填充整体
+            ctx.fill();
+        }
+        ctx.restore()
+        ctx.save();
+            ctx.translate(canvas.width/2,canvas.height/2);
+            ctx.beginPath();
+            ctx.fillStyle = "blue"
+            ctx.rotate(red1);
+            ctx.arc(x,y, 30, 0, 2 * Math.PI, false);
+            // 填充整体
+            ctx.fill();
+            ctx.font = 30 +"px Arial";
+            ctx.fillStyle = "#fff";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("css3",x,y);
+            ctx.restore()
+              ctx.save();
+            ctx.translate(canvas.width/2,canvas.height/2);
+            ctx.beginPath();
+            ctx.fillStyle = "#ff0"
+            ctx.rotate(red2);
+            ctx.arc(x,y, 30, 0, 2 * Math.PI, false);
+            // 填充整体
+            ctx.fill();
+               ctx.font = 30 +"px Arial";
+            ctx.fillStyle = "#fff";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("html",x,y);
+            ctx.restore()
+ ctx.save();
+ ctx.translate(canvas.width/2,canvas.height/2);
+    for (var i = 0; i < 60; i++) {
+            var rad = 2 * Math.PI / 60 * i;
+            // 利用三角函数找点
+            var x = Math.cos(rad) * (250);
+            var y = Math.sin(rad) * (250);
+            ctx.beginPath();
+            ctx.fillStyle = "#ff0"
+            ctx.arc(x,y, 3, 0, 2 * Math.PI, false);
+            // 填充整体
+            ctx.fill();
+        }
+         ctx.restore()
+
+            ctx.save();
+            ctx.translate(canvas.width/2,canvas.height/2);
+            ctx.beginPath();
+            ctx.fillStyle = "red"
+            ctx.rotate(red);
+            ctx.arc(x,y, 40, 0, 2 * Math.PI, false);
+            // 填充整体
+            ctx.fill();
+            ctx.font = 40 +"px Arial";
+            ctx.fillStyle = "#fff";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("js",x,y);
+            ctx.restore()
+}
+
+        drawBckground();
+
+
+
+</script>
+</html>

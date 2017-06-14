@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas {
+           
+        }
+        
+        input {
+            position: absolute;
+            margin-left: 700px;
+            margin-top: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="input" type="text" name="" value="">
+    <input style="margin-top:330px;" id="input1" type="button" name="" value="提交">
+    <img src="11.jpg" alt="" style="width:400px;height:500px;position:absolute;">
+    <canvas id="canvas" width="500" height="600"></canvas>
+
+</body>
+<script>
+    var canvas = document.getElementById("canvas")
+    var ctx = canvas.getContext("2d");
+
+    var image = document.getElementsByTagName("img")[0];
+    document.getElementById("input1").addEventListener("click", function() {
+
+        getmage()
+
+    });
+
+
+    function getmage() {
+        var input = document.getElementById("input");
+        var value = input.value
+        console.log(value)
+        ctx.drawImage(image, 0, 0, 640, 735, 10, 10, 400, 500)
+
+        ctx.font = 40 + "px Arial";
+        ctx.fillStyle = "#ff0";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(value, 100, 200);
+         image.style = "display:none";
+        
+    }
+        window.open(canvas.toDataURL()); ///这个是生成一张图片.
+    
+</script>
+
+</html>

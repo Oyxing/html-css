@@ -24,8 +24,9 @@
     var ctx = canvas.getContext("2d");
     var color = ['#ffcc00', '#ff9900', '#993366', '#66cccc', '#ff99cc'];
     var color1 = ['#ff9900', '#ffcc00', ];
-
-    function Boll() {
+    var text = ["哈哈","呵呵","小明","小白","奥特曼","火影","赵淳","小朋友","海贼","犬夜叉"]
+    
+    function Boll(text) {
         this.r = _.random(10, 30);
         this.x = _.random(0, canvas.width - this.r);
         this.y = _.random(0, canvas.height - this.r);
@@ -34,7 +35,7 @@
         this.dy = _.random(-2, 2);
         // 和自己相关联的小球 从盒子里面随机拿出3 到6个小球
         this.friend = _.sample(bollArr, _.random(3, 6));
-
+        this.text = text;
         bollArr.push(this);
     }
 
@@ -75,13 +76,13 @@
             ctx.fillStyle = _.sample(color);
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillText("Hello", self.x, self.y);
+            ctx.fillText(self.text, self.x, self.y);
         })
     }
     var bollArr = [];
     console.log(bollArr)
     for (var i = 0; i < 10; i++) {
-        new Boll();
+        new Boll(text[i]);
     }
 
     setInterval(function() {
