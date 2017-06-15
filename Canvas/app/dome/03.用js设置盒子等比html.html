@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{float: left;width: 50%;border: 1px solid #000;
+    max-width: 500px;background: url("09.jpg")no-repeat;
+    background-size:cover;box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+
+</body>
+<script>
+   var box = document.querySelectorAll(".box");
+    console.log(box)
+    // window 盒子变换来变化图片宽高
+    window.onresize = set;
+    set();
+
+  function set() {
+
+        // var windowWidth = document.documentElement.clientWidth;
+        // 获取图片在浏览器显示的宽度
+        var boxWidth = parseInt(getComputedStyle(box[0])['width']);
+        console.log(boxWidth)
+            // 设置高度                    图片的高比宽
+        box[0].style.height = boxWidth * (1000 / 1000) + "px";
+        box[1].style.height = boxWidth * (1000 / 1000) + "px";
+    }
+
+</script>
+
+</html>

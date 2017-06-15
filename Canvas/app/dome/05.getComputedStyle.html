@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #elem{position: absolute;left: 100px;top: 200px;height: 100px;}
+    </style>
+</head>
+<body>
+    <div id="elem">dummy</div>
+    <div id="out"></div>
+</body>
+<script>
+    
+    function getThe(){
+    let elem = document.getElementById("elem");
+    let theCss = window.getComputedStyle(elem,null).getPropertyValue("height")
+    
+    console.log(window.getComputedStyle(elem,null));
+    document.getElementById("out").innerHTML = theCss
+
+}
+getThe()
+</script>
+</html>

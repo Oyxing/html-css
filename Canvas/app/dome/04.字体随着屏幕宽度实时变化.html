@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0}
+        html{font-size: 20px;}
+        div{float: left;border: 1px solid #000;width: 33.3%;height: 6.66rem;box-sizing: border-box;}
+    </style>
+</head>
+<body>
+    <div class="">小明</div>
+    <div class="">小白</div>
+    <div class="">小红</div>
+</body>
+<script>
+    // 首先获取字体大小
+    
+    window.onresize = set;
+    set();
+    // UI给了一张图片款如果是1000字体是30px时
+    function set(){
+        var windowwidth = document.documentElement.clientWidth;
+        document.documentElement.style.fontSize = 30 * (windowwidth/1000)+"px"
+    }
+</script>
+</html>

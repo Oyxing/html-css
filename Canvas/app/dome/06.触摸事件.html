@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+
+</body>
+<script>
+    var box = document.querySelector(".box");
+    // 手指触碰
+    document.addEventListener("touchstart",function(){
+        box.innerHTML = "你正用"+ev.touches.lenght+"根";
+        console.log(ev.touches[0])
+
+    })
+    //手指移动
+    document.addEventListener("touchmove",function(){
+        ev.preventDefault();
+        box.innerHTML = "";
+        for (var i = 0; i < ev.touches.length; i++) {
+            box.innerHTML += ev.touches[i].clientX +"<br/>"+ev.touches[i].clientY +"<br/>"
+        }
+    })
+    // 手指移开
+     document.addEventListener("touchend", function(ev) {
+        ev.preventDefault();
+        box.innerHTML = "结束了touch！！";
+    })
+</script>
+</html>
