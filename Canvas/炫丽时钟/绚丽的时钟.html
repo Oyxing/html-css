@@ -23,7 +23,7 @@
     var seconds
     var ctx 
     var bollArr = [];
-    var colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]
 
 window.onload = function(){
         
@@ -62,6 +62,7 @@ function render (ctx){
 }
 
 function update(){
+    
         addBalls(margin_left,margin_top,parseInt(hours/10));
         addBalls(margin_left+15*(r+1),margin_top,parseInt(hours%10));
         addBalls(margin_left+39*(r+1),margin_top,parseInt(minutes/10));
@@ -85,10 +86,12 @@ function addBalls( x , y , num ){
                     color: colors[ Math.floor( Math.random()*colors.length ) ]
                 }
 
-                bollArr.push(aBall)
+                bollArr.push( aBall )
             }
-            
+
+            console.log( bollArr)
 }
+
 
 
 
@@ -101,7 +104,6 @@ function addBalls( x , y , num ){
     for (var i=0 ;i < digit[num].length;i++){
           for (var j=0 ;j < digit[num][i].length;j++){
             if(digit[num][i][j] == 1){
-
                 ctx.beginPath();
                 ctx.arc(x+j*2*(r+1)+(r+1),y+i*2*(r+1)+(r+1),r,0,2*Math.PI);
                 ctx.closePath();

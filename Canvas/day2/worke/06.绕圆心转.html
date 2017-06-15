@@ -15,20 +15,37 @@ var canvas = document.getElementById("canvas")
  var rad = 0.1;
  var red = 0;
  var red1 = 0;
- var red2 = 0;
+ var red2 = 7;
         setInterval(function(){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            red += 0.1;
+          
+             if(red >= 6){
+                red = 0;
+            }else{
+                 red += 0.1; 
+            }
+            console.log("red=="+red)
             drawBckground()
-        },250)
+        },50)
          setInterval(function(){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            red1+= 0.1;
+              if(red1 >= 6){
+                red1 = 0;
+            }else{
+                 red1 += 0.1; 
+                 console.log("red1=="+red1)
+                 
+            }
             drawBckground()
         },100)
         setInterval(function(){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            red2 += 0.1;
+              if(red2 >= 13){
+                red2 = 7;
+            }else{
+                 red2 += 0.1; 
+                 console.log("red2=="+red2)
+            }
             drawBckground()
         },150)
  var x 
@@ -108,6 +125,7 @@ function drawBckground(){
             ctx.translate(canvas.width/2,canvas.height/2);
             ctx.beginPath();
             ctx.fillStyle = "red"
+           
             ctx.rotate(red);
             ctx.arc(x,y, 40, 0, 2 * Math.PI, false);
             // 填充整体

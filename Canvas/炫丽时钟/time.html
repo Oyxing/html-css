@@ -1,0 +1,24 @@
+<html>
+<head>
+
+</head>
+<body>
+<div id="txt"></div>
+</body>
+<script type="text/javascript">
+  function ClearCookie() {
+var expires = new Date();
+expires.setTime(expires.getTime() - 1000); //当前时间减去一秒,相当于立即过期(可以增减)
+document.cookie = "appCode='222''';path=/;expires=" + expires.toGMTString() + ""; //expires是对应过期时间的设置,不设这个值,cookie默认在关闭浏览器时失效
+document.cookie = "roleID='333''';path=/;expires=" + expires.toGMTString() + "";
+document.cookie = "parentMenuID='000''';path=/;expires=" + expires.toGMTString() + "";
+document.cookie = "currentMenuName='哈哈''';path=/;expires=" + expires.toGMTString() + "";
+
+  console.log(expires.toGMTString())
+}
+// document.getElementById('txt').innerHTML=h+":"+m+":"+s
+
+ ClearCookie()
+
+</script>
+</html>

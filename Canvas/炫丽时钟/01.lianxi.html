@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="width:100%;">
+    <canvas id="canvas" width="1300"; width="100%"></canvas>
+</body>
+<script src="https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="js/digit.js"></script>
+<script>
+    var window_width = 1204;
+    var window_height = 768;
+    var r = 8;
+    var margin_top = 60;
+    var margin_left = 30;
+    var hours 
+    var minutes 
+    var seconds
+    var ctx 
+    var baodata
+    const endTime = new Date(2017,5,17,18,47,52);
+    var bollArr = [];
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]
+
+window.onload = function(){
+        
+    var canvas = document.getElementById("canvas"); 
+    ctx = canvas.getContext("2d");
+
+    canvas.width = window_width
+    canvas.height = window_height
+    render(ctx);
+       setInterval(function(){
+        render (ctx)
+        update()
+    }, 500)
+
+    }
+    
+
+
+
+function update(){
+
+         var newdata = new Date(baodata.getTime() + 10 * 60);
+         var ret = newdata.getTime() - baodata.getTime();
+            ret = Math.round( ret/1000 )
+        console.log("11=="+newdata);
+        console.log("22=="+baodata);
+
+
+         var newhours =newdata.getHours();
+        var newminutes = newdata.getMinutes();
+        
+        var newseconds = newdata.getSeconds();
+        
+        
+        var baohours = baodata.getHours();
+        var baominutes = baodata.getMinutes();
+        var baoseconds = baodata.getSeconds();
+
+        if(newseconds !=   baoseconds){
+            
+            if( parseInt(newhours/10) !=  parseInt(baohours/10)){
+                addBalls(margin_left+ 0,margin_top,parseInt(baohours/10));
+
+                }
+            if( parseInt(newhours%10) !=  parseInt(baohours%10)){
+                addBalls(margin_left + 15*(r+1),margin_top,parseInt(baohours%10));
+                    }
+            if( parseInt(newminutes/10) !=  parseInt(baominutes/10)){
+
+                addBalls(margin_left + 39*(r+1),margin_top,parseInt(baominutes/10));
+
+               }
+            if( parseInt(newminutes%10) !=  parseInt(baominutes%10)){
+                addBalls(margin_left + 54*(r+1),margin_top,parseInt(baominutes%10));
+
+                        }
+            if( parseInt(newseconds/10) !=  parseInt(baoseconds/10)){
+                addBalls(margin_left + 78*(r+1),margin_top,parseInt(baoseconds/10));
+
+               }
+            if( parseInt(newseconds%10) !=  parseInt(baoseconds%10)){
+
+                addBalls(margin_left+ 93*(r+1),margin_top,parseInt(baoseconds%10));
+
+                }
+        }
+updateBalls()
+}
+  function updateBalls(){
+
+    for( var i = 0 ; i < bollArr.length ; i ++ ){
+
+        bollArr[i].x += bollArr[i].vx;
+        bollArr[i].y += bollArr[i].vy;
+        bollArr[i].vy += bollArr[i].g;
+
+        // if(  bollArr[i].y >= window_height-r ){
+        //      bollArr[i].y = window_height-r;
+        //      bollArr[i].vy = -  bollArr[i].vy*1.75;
+        // }
+    }
+
+    // var cnt = 0
+    // for( var i = 0 ; i < balls.length ; i ++ )
+    //     if( balls[i].x + RADIUS > 0 && balls[i].x -RADIUS < WINDOW_WIDTH )
+    //         balls[cnt++] = balls[i]
+
+    // while( balls.length > cnt ){
+    //     balls.pop();
+    // }
+}
+function addBalls( x , y , num ){
+
+    for( var i = 0  ; i < digit[num].length ; i ++ )
+        for( var j = 0  ; j < digit[num][i].length ; j ++ )
+            if( digit[num][i][j] == 1 ){
+                var aBall = {
+                    x:x+j*2*(r+1)+(r+1),
+                    y:y+i*2*(r+1)+(r+1),
+                    g:1.5+Math.random(),
+                    vx:Math.pow( -1 , Math.ceil( Math.random()*1000 ) ) * 4,
+                    vy:-10,
+                    color: colors[ Math.floor( Math.random()*colors.length ) ]
+                }
+
+                bollArr.push( aBall )
+            }
+
+            console.log( bollArr)
+}
+function render (ctx){
+    
+        var enddata = new Date()
+        ctx.clearRect(0, 0, window_width,window_height);
+        
+        var endhours = enddata.getHours();
+        var endminutes = enddata.getMinutes();
+        var endseconds = enddata.getSeconds();
+
+        renderDigit(margin_left,margin_top,parseInt(endhours/10),ctx);
+        renderDigit(margin_left+15*(r+1),margin_top,parseInt(endhours%10),ctx);
+        renderDigit(margin_left+30*(r+1),margin_top,10,ctx);
+        renderDigit(margin_left+39*(r+1),margin_top,parseInt(endminutes/10),ctx);
+        renderDigit(margin_left+54*(r+1),margin_top,parseInt(endminutes%10),ctx);
+        renderDigit(margin_left+69*(r+1),margin_top,10,ctx);
+        renderDigit(margin_left+78*(r+1),margin_top,parseInt(endseconds/10),ctx);
+        renderDigit(margin_left+93*(r+1),margin_top,parseInt(endseconds%10),ctx)
+            
+    for( var i = 0 ; i < bollArr.length ; i ++ ){
+
+            ctx.fillStyle=bollArr[i].color;
+
+            ctx.beginPath();
+            ctx.arc( bollArr[i].x , bollArr[i].y , r , 0 , 2*Math.PI , true );
+            ctx.closePath();
+            ctx.fill();
+        }
+        baodata = enddata 
+        
+}
+
+
+ function renderDigit(x,y,num,ctx){
+     ctx.fillStyle = "rgb(0,102,153)";
+
+    for (var i=0 ;i < digit[num].length;i++){
+          for (var j=0 ;j < digit[num][i].length;j++){
+            if(digit[num][i][j] == 1){
+                ctx.beginPath();
+                ctx.arc(x+j*2*(r+1)+(r+1),y+i*2*(r+1)+(r+1),r,0,2*Math.PI);
+                ctx.closePath();
+                ctx.fill();
+
+            }
+        }
+    }
+  
+ }
+
+
+ 
+</script>
+</html>
