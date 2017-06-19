@@ -7,13 +7,13 @@
     <title>Document</title>
 </head>
 <body style="width:100%;">
-    <canvas id="canvas" width="1300"; width="100%"></canvas>
+    <canvas id="canvas" width="1300"; height="100%"></canvas>
 </body>
 <script src="https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="js/digit.js"></script>
 <script>
-    var window_width = 1204;
-    var window_height = 768;
+    var window_width = 1300;
+    var window_height = 500;
     var r = 8;
     var margin_top = 60;
     var margin_left = 30;
@@ -49,8 +49,7 @@ function update(){
          var newdata = new Date(baodata.getTime() + 10 * 60);
          var ret = newdata.getTime() - baodata.getTime();
             ret = Math.round( ret/1000 )
-        console.log("11=="+newdata);
-        console.log("22=="+baodata);
+       
 
 
          var newhours =newdata.getHours();
@@ -66,11 +65,14 @@ function update(){
         if(newseconds !=   baoseconds){
             
             if( parseInt(newhours/10) !=  parseInt(baohours/10)){
+
                 addBalls(margin_left+ 0,margin_top,parseInt(baohours/10));
 
                 }
             if( parseInt(newhours%10) !=  parseInt(baohours%10)){
+
                 addBalls(margin_left + 15*(r+1),margin_top,parseInt(baohours%10));
+
                     }
             if( parseInt(newminutes/10) !=  parseInt(baominutes/10)){
 
@@ -78,10 +80,13 @@ function update(){
 
                }
             if( parseInt(newminutes%10) !=  parseInt(baominutes%10)){
+
                 addBalls(margin_left + 54*(r+1),margin_top,parseInt(baominutes%10));
 
                         }
             if( parseInt(newseconds/10) !=  parseInt(baoseconds/10)){
+
+
                 addBalls(margin_left + 78*(r+1),margin_top,parseInt(baoseconds/10));
 
                }
@@ -91,7 +96,7 @@ function update(){
 
                 }
         }
-updateBalls()
+        updateBalls()
 }
   function updateBalls(){
 
@@ -100,22 +105,21 @@ updateBalls()
         bollArr[i].x += bollArr[i].vx;
         bollArr[i].y += bollArr[i].vy;
         bollArr[i].vy += bollArr[i].g;
-                    console.log( bollArr[i].vx*10+"===="+ bollArr[i].vy*10)
 
-        // if(  bollArr[i].y >= window_height-r ){
-        //      bollArr[i].y = window_height-r;
-        //      bollArr[i].vy = -  bollArr[i].vy*1.75;
-        // }
+        if(  bollArr[i].y >= window_height-r ){
+             bollArr[i].y = window_height-r;
+             bollArr[i].vy = -  bollArr[i].vy*0.5;
+        }
     }
 
-    // var cnt = 0
-    // for( var i = 0 ; i < balls.length ; i ++ )
-    //     if( balls[i].x + RADIUS > 0 && balls[i].x -RADIUS < WINDOW_WIDTH )
-    //         balls[cnt++] = balls[i]
+    var cnt = 0
+    for( var i = 0 ; i < bollArr.length ; i ++ )
+        if( bollArr[i].x + r > 0 && bollArr[i].x -r < window_width )
+            bollArr[cnt++] = bollArr[i]
 
-    // while( balls.length > cnt ){
-    //     balls.pop();
-    // }
+    while(bollArr.length > cnt ){
+        bollArr.pop();
+    }
 }
 function addBalls( x , y , num ){
 
@@ -132,6 +136,7 @@ function addBalls( x , y , num ){
                     color: colors[ Math.floor( Math.random()*colors.length ) ]
                
                 }
+
 
                 bollArr.push( aBall )
             }
@@ -160,7 +165,7 @@ function render (ctx){
             ctx.fillStyle=bollArr[i].color;
 
             ctx.beginPath();
-            ctx.arc( bollArr[i].x , bollArr[i].y , r , 0 , 2*Math.PI , true );
+            ctx.arc( bollArr[i].x , bollArr[i].y , 6 , 0 , 2*Math.PI , true );
             ctx.closePath();
             ctx.fill();
         }
